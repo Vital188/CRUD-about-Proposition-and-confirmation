@@ -10,15 +10,15 @@ function Line({ ideas }) {
     const [tit, setTit] = useState('Confirmation')
 
     const remove = id => {
-        setIdeas({id});
+        setReals({id});
     }
 
-        const add = () => {
-            setReals({
-                ideas_id: ideas[1][0].iid
-            });
- }
-console.log(ideas[1])
+//         const add = () => {
+//             setReals({
+//                 ideas_id: ideas[1][0].iid
+//             });
+//  }
+console.log(ideas)
     return (
         <li className="list-group-item" style={{
             display: 'flex',
@@ -34,7 +34,7 @@ console.log(ideas[1])
                         </div> : null}
                         <div>TITLE: {ideas[0]}. </div>
                         <div className="home__content__info">
-                       Description: {ideas[1][0].post}. 
+                       
                     </div>
                     <div className="home__content__info">
                       Price:  {ideas[1][0].price} Eur
@@ -44,23 +44,24 @@ console.log(ideas[1])
                     </div>
                 </div>
             </div>
-            <div className="home__buttons">
-                                
-                                 <button onClick={add} type="button" style={{
+            {/* <button onClick={add} type="button" style={{
                                     backgroundColor: color,      
                                     color: 'black'
-                                }} className="btn btn-outline-success">{tit}</button> 
+                                }} className="btn btn-outline-success">{tit}</button>  */}
+            
+                                
+                                 
     
                 <ul className="list-group">
                     {
-                        ideas[1]?.map(i => i.iid !== null ? <li key={i.iid} className="list-group-item">
-                           
-                                <button onClick={() => remove(i.iid)} type="button" className="btn btn-outline-danger">Delete</button>
+                        ideas[1]?.map(r => r.id !== null ? <li key={r.id} className="list-group-item">
+                           Description: {r.post}. 
+                                <button onClick={() => remove(r.id)} type="button" className="btn btn-outline-danger">Delete</button>
                             
                         </li> : null)
                     }
                 </ul>
-            </div>
+            
         </li>
     )
 }

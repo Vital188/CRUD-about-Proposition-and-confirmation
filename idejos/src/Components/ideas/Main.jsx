@@ -20,7 +20,7 @@ function Main() {
 
     // READ for list
     useEffect(() => {
-        axios.get('http://localhost:3003/home/ideas', authConfig())
+        axios.get('http://localhost:3003/server/ideas/wc', authConfig())
             .then(res => {
                 setIdeas(res.data);
             })
@@ -59,7 +59,7 @@ function Main() {
             });
     }, [editData, makeMsg]);
 
-
+console.log(ideas)
     return (
         <Ideas.Provider value={{
             setCreateData,

@@ -142,31 +142,31 @@ app.post("/home/ideas", (req, res) => {
 
 app.post("/home/reals/:id", (req, res) => {
     const sql = `
-    INSERT INTO reals ( ideas_id)
+    INSERT INTO reals (ideas_id)
     VALUES (?)
     `;
-    con.query(sql, [ req.params.id], (err, result) => {
+    con.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.send({ msg: 'OK', text: 'Thanks, for commenting.', type: 'info' });
     });
 });
-app.get("/home/ideas", (req, res) => {
-    const sql = `
-    SELECT *
-    FROM ideas
-    ORDER BY id DESC
-    `;
-    con.query(sql, (err, result) => {
-        if (err) throw err;
-        res.send(result);
-    });
-});
+// app.get("/home/ideas", (req, res) => {
+//     const sql = `
+//     SELECT *
+//     FROM ideas
+//     ORDER BY id DESC
+//     `;
+//     con.query(sql, (err, result) => {
+//         if (err) throw err;
+//         res.send(result);
+//     });
+// });
 app.get("/home/reals/", (req, res) => {
     const sql = `
     SELECT r.*, i.id AS iid, i.title, i.post, i.price 
     FROM ideas AS i
     LEFT JOIN reals AS r
-    ON r.ideas_id = r.id
+    ON r.ideas_id = i.id
     ORDER BY r.orderis
     `;
     con.query(sql, (err, result) => {
@@ -180,8 +180,22 @@ app.get("/server/reals/wc", (req, res) => {
     SELECT r.*, i.id AS iid, i.title, i.post, i.price, i.image 
     FROM ideas AS i
     LEFT JOIN reals AS r
-    ON r.ideas_id = r.id
+    ON r.ideas_id = i.id
     ORDER BY r.orderis
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+app.get("/home/ideas", (req, res) => {
+    const sql = `
+    SELECT i.*, r.id AS rid 
+    FROM ideas AS i
+    LEFT JOIN reals AS r
+    ON r.id = i.id
+    ORDER BY i.title
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
