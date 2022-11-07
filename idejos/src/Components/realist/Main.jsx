@@ -1,4 +1,4 @@
-import Comment from "../../Contexts/Comment";
+import Realist from "../../Contexts/Realist";
 import List from "./List";
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -8,8 +8,8 @@ import DataContext from "../../Contexts/DataContext";
 function Main() {
 
     const [lastUpdate, setLastUpdate] = useState(Date.now());
-    const [movies, setMovies] = useState(null);
-    const [comment, setComment] = useState(null);
+    const [ideas, setIdeas] = useState(null);
+    const [real, setReal] = useState(null);
     const { makeMsg } = useContext(DataContext);
 
     const reList = data => {
@@ -23,30 +23,30 @@ function Main() {
         });
         return [...d];
     }
-
+    console.log(ideas)
     // READ for list
     useEffect(() => {
-        axios.get('http://localhost:3003/server/movies/wc', authConfig())
+        axios.get('http://localhost:3003/server/ideas/wc', authConfig())
             .then(res => {
-                setMovies(reList(res.data));
+                setIdeas(reList(res.data));
             })
     }, [lastUpdate]);
 
     useEffect(() => {
-        if (null === comment) {
+        if (null === real) {
             return;
         }
-        axios.delete('http://localhost:3003/server/comments/' + comment.id, authConfig())
+        axios.delete('http://localhost:3003/server/reals/' + real.id, authConfig())
             .then(res => {
                 setLastUpdate(Date.now());
                 makeMsg(res.data.text, res.data.type);
             })
-    }, [comment, makeMsg]);
+    }, [real, makeMsg]);
 
     return (
-        <Comment.Provider value={{
-            setComment,
-            movies
+        <Realist.Provider value={{
+            setReal,
+            ideas
         }}>
             <div className="container">
                 <div className="row">
@@ -55,7 +55,7 @@ function Main() {
                     </div>
                 </div>
             </div>
-        </Comment.Provider>
+        </Realist.Provider>
     );
 }
 

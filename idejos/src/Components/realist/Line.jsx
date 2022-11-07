@@ -1,12 +1,12 @@
 import { useContext } from 'react';
-import Comment from '../../Contexts/Comment';
+import Realist from '../../Contexts/Realist';
 
-function Line({ movie }) {
+function Line({ ideas }) {
 
-    const { setComment } = useContext(Comment);
+    const { setIdeas } = useContext(Realist);
 
     const remove = id => {
-        setComment({id});
+        setIdeas({id});
     }
 
     return (
@@ -14,24 +14,28 @@ function Line({ movie }) {
             <div className="home">
                 <div className="home__content">
                     <div className="home__content__info">
-                        <h2>{movie[0]} <small>({movie[1].length})</small></h2>
-                        {movie[1][0].image ? <div className='img-bin'>
-                            <img src={movie[1][0].image} alt={movie[0]}>
+                        <h2>{ideas[0]} <small>({ideas[1].length})</small></h2>
+                        {ideas[1][0].image ? <div className='img-bin'>
+                            <img src={ideas[1][0].image} alt={ideas[0]}>
                             </img>
                         </div> : null}
+                        <div className="home__content__imfo">
+                        {ideas[1][0].post} 
                     </div>
+                    </div>
+
                     <div className="home__content__price">
-                        {movie[1][0].price} Eur
+                        {ideas[1][0].price} Eur
                     </div>
                 </div>
             </div>
             <div className="comments">
                 <ul className="list-group">
                     {
-                        movie[1]?.map(c => c.cid !== null ? <li key={c.cid} className="list-group-item">
-                            <p>{c.post}</p>
+                        ideas[1]?.map(i => i.rid !== null ? <li key={i.rid} className="list-group-item">
+                            <p>{i.post}</p>
                             <div className="home__buttons">
-                                <button onClick={() => remove(c.cid)} type="button" className="btn btn-outline-danger">Delete</button>
+                                <button onClick={() => remove(i.rid)} type="button" className="btn btn-outline-danger">Delete</button>
                             </div>
                         </li> : null)
                     }

@@ -1,28 +1,28 @@
 import { useState, useEffect, useContext } from 'react';
-import Comment from "../../Contexts/Comment";
+import Realist from '../../Contexts/Realist';
 import Line from './Line';
 
 
 function List() {
 
-    const { movies } = useContext(Comment);
-    const [stats, setStats] = useState({ movieCount: null });
+    const { ideas } = useContext(Realist);
+    const [stats, setStats] = useState({ ideasCount: null });
 
 
     useEffect(() => {
-        if (null === movies) {
+        if (null === ideas) {
             return;
         }
-        setStats(s => ({ ...s, movieCount: movies.length }));
-    }, [movies]);
+        setStats(s => ({ ...s, ideasCount: ideas.length }));
+    }, [ideas]);
 
     return (
         <div className="card m-4">
-            <h5 className="card-header">Movies List ({stats.movieCount})</h5>
+            <h5 className="card-header">Ideas List ({stats.ideasCount})</h5>
             <div className="card-body">
                 <ul className="list-group">
                     {
-                        movies?.map(m => <Line key={m[1][0].id} movie={m} />)
+                        ideas?.map(i => <Line key={i[1][0].id} ideas={i} />)
                     }
                 </ul>
             </div>

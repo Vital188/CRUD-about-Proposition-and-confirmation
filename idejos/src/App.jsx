@@ -1,9 +1,9 @@
 import './App.scss';
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Nav from './Components/Nav';
-import Home from './Components/home/Main';
-import MainComments from './Components/comment/Main';
-import MainMovies from './Components/movies/Main';
+import ideas from './Components/ideas/Main'
+import MainRealist from './Components/realist/Main';
+import MainIdeas from './Components/ideas/Main';
 import RegisterPage from './Components/register/Main';
 import { login, logout, authConfig } from './Functions/auth';
 import { useState, useEffect, useCallback, useContext } from 'react';
@@ -38,7 +38,7 @@ function App() {
     setMsgs(m => [...m, msg]);
     setTimeout(() => {
       setMsgs(m => m.filter(mes => mes.id !== msg.id));
-    }, 6000);
+    }, 2000);
   }, []);
 
   return (
@@ -51,11 +51,11 @@ function App() {
         <ShowNav roleChange={roleChange} />
         <Messages />
         <Routes>
-          <Route path="/" element={<RequireAuth role="user"><Home /></RequireAuth>}></Route>
+          <Route path="/" element={<RequireAuth role="user"><ideas /></RequireAuth>}></Route>
           <Route path="/login" element={<LoginPage setRoleChange={setRoleChange} />} />
           <Route path="/logout" element={<LogoutPage setRoleChange={setRoleChange} />} />
-          <Route path="/movies" element={<RequireAuth role="admin"><MainMovies /></RequireAuth>}></Route>
-          <Route path="/comments" element={<RequireAuth role="admin"><MainComments /></RequireAuth>}></Route>
+          <Route path="/ideas" element={<RequireAuth role="admin"><MainIdeas /></RequireAuth>}></Route>
+          <Route path="/realisation" element={<RequireAuth role="admin"><MainRealist /></RequireAuth>}></Route>
           <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} />
         </Routes>
       </BrowserRouter>

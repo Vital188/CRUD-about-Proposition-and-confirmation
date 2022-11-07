@@ -1,15 +1,16 @@
 import { useState, useContext, useRef } from 'react';
 import DataContext from '../../Contexts/DataContext';
-import Movies from '../../Contexts/Movies';
+import Ideas from '../../Contexts/Ideas';
 import getBase64 from '../../Functions/getBase64';
 
 function Create() {
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
+    const [post, setPost] = useState('')
     const fileInput = useRef();
 
-    const { setCreateData } = useContext(Movies);
+    const { setCreateData } = useContext(Ideas);
     const {makeMsg} = useContext(DataContext);
 
     const [photoPrint, setPhotoPrint] = useState(null);
@@ -31,8 +32,8 @@ function Create() {
             makeMsg('Invalid price', 'error');
             return;
         }
-        if (parseFloat(price) > 99.99) {
-            makeMsg('Max price is 99.99', 'error');
+        if (parseFloat(price) > 999.99) {
+            makeMsg('Max price is 999.99', 'error');
             return;
         }
 
@@ -41,9 +42,11 @@ function Create() {
         setCreateData({
             title,
             price: parseFloat(price),
+            post,
             image: photoPrint
         });
         setTitle('');
+        setPost('')
         setPrice('');
         setPhotoPrint(null);
         fileInput.current.value = null;
@@ -51,21 +54,31 @@ function Create() {
 
     return (
         <div className="card m-4">
-            <h5 className="card-header">New Movie</h5>
+            <h5 className="card-header">New Idea</h5>
             <div className="card-body">
                 <div className="mb-3">
-                    <label className="form-label">Movie title</label>
+                    <label className="form-label">Idea title</label>
                     <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
+                <label className="form-label">Idea description</label>
+          <textarea style={{
+            marginBottom: '50px',
+            height: '300px'
+          }}
+            className="form-control"
+            value={post}
+            onChange={(e) => setPost(e.target.value)}
+          ></textarea>
+                
                 <div className="mb-3">
-                    <label className="form-label">Movie Price</label>
-                    <input type="text" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Movie Image</label>
+                    <label className="form-label">Idea Image</label>
                     <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
                 </div>
                 {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload"></img></div> : null}
+                <div className="mb-3">
+                    <label className="form-label">Amount required to implement the idea (eur)</label>
+                    <input type="number" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
+                </div>
                 <button onClick={add} type="button" className="btn btn-outline-success">Add</button>
             </div>
         </div>
