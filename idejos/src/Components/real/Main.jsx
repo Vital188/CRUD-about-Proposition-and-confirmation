@@ -11,7 +11,6 @@ function Main() {
     const [ideas, setIdeas] = useState(null);
     const [real, setReal] = useState(null);
     const { makeMsg } = useContext(DataContext);
-    const [reals, setReals] = useState(null)
 
     const reList = data => {
         const d = new Map();
@@ -27,39 +26,27 @@ function Main() {
     console.log(ideas)
     // READ for list
     useEffect(() => {
-        axios.get('http://localhost:3003/server/reals/wc', authConfig())
+        axios.get('http://localhost:3003/home/reals/', authConfig())
             .then(res => {
                 setIdeas(reList(res.data));
             })
     }, [lastUpdate]);
 
-    useEffect(() => {
-        if (null === reals) {
-            return;
-        }
-        axios.delete('http://localhost:3003/server/ideas/' + reals.id, authConfig())
-            .then(res => {
-                setLastUpdate(Date.now());
-                makeMsg(res.data.text, res.data.type);
-            })
-    }, [reals, makeMsg]);
-
-    useEffect(() => {
-        if (null === reals) {
-            return;
-        }
-        axios.post('http://localhost:3003/home/reals/' + reals.ideas_id, reals, authConfig())
-        .then(res => {
-            setLastUpdate(Date.now());
-            makeMsg(res.data.text, res.data.type);
-        })
-     }, [reals, makeMsg]);
+    // useEffect(() => {
+    //     if (null === real) {
+    //         return;
+    //     }
+    //     axios.delete('http://localhost:3003/server/reals/' + real.id, authConfig())
+    //         .then(res => {
+    //             setLastUpdate(Date.now());
+    //             makeMsg(res.data.text, res.data.type);
+    //         })
+    // }, [real, makeMsg]);
 
     return (
         <Realist.Provider value={{
             setReal,
-            ideas,
-            setReals
+            ideas
         }}>
             <div className="container">
                 <div className="row">

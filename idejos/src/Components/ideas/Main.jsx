@@ -20,7 +20,7 @@ function Main() {
 
     // READ for list
     useEffect(() => {
-        axios.get('http://localhost:3003/server/ideas', authConfig())
+        axios.get('http://localhost:3003/home/ideas', authConfig())
             .then(res => {
                 setIdeas(res.data);
             })
@@ -30,7 +30,7 @@ function Main() {
         if (null === createData) {
             return;
         }
-        axios.post('http://localhost:3003/server/ideas', createData, authConfig())
+        axios.post('http://localhost:3003/home/ideas', createData, authConfig())
             .then(res => {
                 setLastUpdate(Date.now());
                 makeMsg(res.data.text, res.data.type);

@@ -1,42 +1,62 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import axios from 'axios';
 import Realist from '../../Contexts/Realist';
+import { authConfig } from '../../Functions/auth';
 
 function Line({ ideas }) {
 
-    const { setIdeas } = useContext(Realist);
+    const { setIdeas, setReals } = useContext(Realist);
+    const [color, setColor] = useState('white');
+    const [tit, setTit] = useState('Confirmation')
 
     const remove = id => {
         setIdeas({id});
     }
 
+        const add = () => {
+            setReals({
+                ideas_id: ideas[1][0].iid
+            });
+ }
+console.log(ideas[1])
     return (
-        <li className="list-group-item">
+        <li className="list-group-item" style={{
+            display: 'flex',
+    alignItems: 'center'
+        }}>
             <div className="home">
                 <div className="home__content">
                     <div className="home__content__info">
-                        <h2>{ideas[0]} <small>({ideas[1].length})</small></h2>
+                       
                         {ideas[1][0].image ? <div className='img-bin'>
                             <img src={ideas[1][0].image} alt={ideas[0]}>
                             </img>
                         </div> : null}
-                        <div className="home__content__imfo">
-                        {ideas[1][0].post} 
+                        <div>TITLE: {ideas[0]}. </div>
+                        <div className="home__content__info">
+                       Description: {ideas[1][0].post}. 
                     </div>
+                    <div className="home__content__info">
+                      Price:  {ideas[1][0].price} Eur
                     </div>
 
-                    <div className="home__content__price">
-                        {ideas[1][0].price} Eur
+                    
                     </div>
                 </div>
             </div>
-            <div className="comments">
+            <div className="home__buttons">
+                                
+                                 <button onClick={add} type="button" style={{
+                                    backgroundColor: color,      
+                                    color: 'black'
+                                }} className="btn btn-outline-success">{tit}</button> 
+    
                 <ul className="list-group">
                     {
-                        ideas[1]?.map(i => i.rid !== null ? <li key={i.rid} className="list-group-item">
-                            <p>{i.post}</p>
-                            <div className="home__buttons">
-                                <button onClick={() => remove(i.rid)} type="button" className="btn btn-outline-danger">Delete</button>
-                            </div>
+                        ideas[1]?.map(i => i.iid !== null ? <li key={i.iid} className="list-group-item">
+                           
+                                <button onClick={() => remove(i.iid)} type="button" className="btn btn-outline-danger">Delete</button>
+                            
                         </li> : null)
                     }
                 </ul>

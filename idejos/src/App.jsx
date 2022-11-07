@@ -1,9 +1,10 @@
 import './App.scss';
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Nav from './Components/Nav';
-import ideas from './Components/ideas/Main'
+import Ideas from './Components/ideas/Main'
 import MainRealist from './Components/realist/Main';
 import MainIdeas from './Components/ideas/Main';
+import MainReal from './Components/real/Main'
 import RegisterPage from './Components/register/Main';
 import { login, logout, authConfig } from './Functions/auth';
 import { useState, useEffect, useCallback, useContext } from 'react';
@@ -51,12 +52,13 @@ function App() {
         <ShowNav roleChange={roleChange} />
         <Messages />
         <Routes>
-          <Route path="/" element={<RequireAuth role="user"><ideas /></RequireAuth>}></Route>
+          <Route path="/" element={<RequireAuth role="user"><MainIdeas /></RequireAuth>}></Route>
           <Route path="/login" element={<LoginPage setRoleChange={setRoleChange} />} />
           <Route path="/logout" element={<LogoutPage setRoleChange={setRoleChange} />} />
-          <Route path="/ideas" element={<RequireAuth role="admin"><MainIdeas /></RequireAuth>}></Route>
+          <Route path="/ideas" element={<RequireAuth role="user"><MainIdeas /></RequireAuth>}></Route>
           <Route path="/realisation" element={<RequireAuth role="admin"><MainRealist /></RequireAuth>}></Route>
-          <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} />
+          <Route path="/realis" element={<RequireAuth role="user"><MainReal /></RequireAuth>}></Route>
+          {/* <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} /> */}
         </Routes>
       </BrowserRouter>
     </DataContext.Provider>

@@ -129,7 +129,7 @@ app.post("/register", (req, res) => {
 
 
 //CREATE
-app.post("/server/ideas", (req, res) => {
+app.post("/home/ideas", (req, res) => {
     const sql = `
     INSERT INTO ideas (title, post, price, image)
     VALUES (?, ?, ?, ?)
@@ -139,19 +139,18 @@ app.post("/server/ideas", (req, res) => {
         res.send({ msg: 'OK', text: 'New idea was added.', type: 'success' });
     });
 });
+
 app.post("/home/reals/:id", (req, res) => {
     const sql = `
-    INSERT INTO reals (post, movie_id)
-    VALUES (?, ?)
+    INSERT INTO reals ( ideas_id)
+    VALUES (?)
     `;
-    con.query(sql, [req.body.post, req.params.id], (err, result) => {
+    con.query(sql, [ req.params.id], (err, result) => {
         if (err) throw err;
         res.send({ msg: 'OK', text: 'Thanks, for commenting.', type: 'info' });
     });
 });
-
-// READ (all)
-app.get("/server/ideas", (req, res) => {
+app.get("/home/ideas", (req, res) => {
     const sql = `
     SELECT *
     FROM ideas
@@ -162,26 +161,39 @@ app.get("/server/ideas", (req, res) => {
         res.send(result);
     });
 });
-app.get("/home/ideas", (req, res) => {
+app.get("/home/reals/", (req, res) => {
     const sql = `
-    SELECT i.*, c.id AS cid, c.post
-    FROM ideas AS m
-    LEFT JOIN creals AS c
-    ON c.movie_id = m.id
-    ORDER BY m.title
+    SELECT r.*, i.id AS iid, i.title, i.post, i.price 
+    FROM ideas AS i
+    LEFT JOIN reals AS r
+    ON r.ideas_id = r.id
+    ORDER BY r.orderis
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result);
     });
 });
+
+app.get("/server/reals/wc", (req, res) => {
+    const sql = `
+    SELECT r.*, i.id AS iid, i.title, i.post, i.price, i.image 
+    FROM ideas AS i
+    LEFT JOIN reals AS r
+    ON r.ideas_id = r.id
+    ORDER BY r.orderis
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 app.get("/server/ideas/wc", (req, res) => {
     const sql = `
-    SELECT I.*, r.id AS rid, r.post
-    FROM ideas AS i
-    INNER JOIN reals AS r
-    ON r.movie_id = i.id
-    ORDER BY i.title
+    SELECT *
+    FROM ideas
+    ORDER BY id DESC
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
@@ -229,6 +241,20 @@ app.put("/home/ideas/:id", (req, res) => {
         res.send({ msg: 'OK', text: 'Thanks, for your vote.', type: 'info' });
     });
 });
+
+app.put("/server/reals/:id", (req, res) => {
+    const sql = `
+    UPDATE reals
+    SET 
+    orderis = ?
+    WHERE id = ?
+    `;
+    con.query(sql, [ req.body.confirmed, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send({ rsg: 'OK', text: 'Thanks, for your vote.', type: 'info' });
+    });
+});
+
 app.put("/server/ideas/:id", (req, res) => {
     let sql;
     let r;
