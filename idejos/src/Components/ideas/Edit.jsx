@@ -52,22 +52,22 @@ function Edit() {
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Edit Ideas</h5>
+                        <h5 className="modal-title">Edit Project</h5>
                         <button onClick={() => setModalData(null)} type="button" className="btn-close"></button>
                     </div>
                     <div className="modal-body"></div>
                     <div className="card m-4">
                         <div className="card-body">
                             <div className="mb-3">
-                                <label className="form-label">Ideas Title</label>
+                                <label className="form-label">Project Title</label>
                                 <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Ideas Price</label>
+                                <label className="form-label">Project Price</label>
                                 <input type="text" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Ideas Image</label>
+                                <label className="form-label">Project Image</label>
                                 <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
                             </div>
                             {photoPrint ? <div className='img-bin'>

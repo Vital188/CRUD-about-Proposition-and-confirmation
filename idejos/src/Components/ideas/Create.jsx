@@ -54,13 +54,13 @@ function Create() {
 
     return (
         <div className="card m-4">
-            <h5 className="card-header">New Idea</h5>
+            <h5 className="card-header">New Project</h5>
             <div className="card-body">
                 <div className="mb-3">
-                    <label className="form-label">Idea title</label>
+                    <label className="form-label">Project title</label>
                     <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
-                <label className="form-label">Idea description</label>
+                <label className="form-label">Project description</label>
           <textarea style={{
             marginBottom: '50px',
             height: '300px'
@@ -71,12 +71,12 @@ function Create() {
           ></textarea>
                 
                 <div className="mb-3">
-                    <label className="form-label">Idea Image</label>
+                    <label className="form-label">Project image</label>
                     <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
                 </div>
                 {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload"></img></div> : null}
                 <div className="mb-3">
-                    <label className="form-label">Amount required to implement the idea (eur)</label>
+                    <label className="form-label">Amount required project implement (eur):</label>
                     <input type="number" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
                 </div>
                 <button onClick={add} type="button" className="btn btn-outline-success">Add</button>

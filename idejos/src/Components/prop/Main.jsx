@@ -34,18 +34,7 @@ function Main() {
             })
     }, [lastUpdate]);
 
-    // useEffect(() => {
-    //     if (null === real) {
-    //         return;
-    //     }
-    //     axios.delete('http://localhost:3003/server/reals/' + real.id, authConfig())
-    //         .then(res => {
-    //             setLastUpdate(Date.now());
-    //             makeMsg(res.data.text, res.data.type);
-    //         })
-    // }, [real, makeMsg]);
-
-    useEffect(() => {
+     useEffect(() => {
         if (null === create) {
             return;
         }

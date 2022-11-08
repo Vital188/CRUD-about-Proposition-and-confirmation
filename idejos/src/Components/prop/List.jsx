@@ -18,7 +18,8 @@ function List() {
 
     return (
         <div className="card m-4">
-            <h5 className="card-header">Project List ({stats.ideasCount})</h5>
+            <h4 className="card-header">Project list <b> (administrator confirmed)</b> ({stats.ideasCount})</h4>
+            <h5 className="card-header">If you like project, you can make donations!</h5>
             <div className="card-body">
                 <ul className="list-group">
                     {
