@@ -24,7 +24,7 @@ function Main() {
         });
         return [...d];
     }
-    console.log(ideas)
+  
     // READ for list
     useEffect(() => {
         axios.get('http://localhost:3003/home/prop', authConfig())

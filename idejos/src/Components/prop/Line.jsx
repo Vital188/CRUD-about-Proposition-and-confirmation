@@ -17,7 +17,7 @@ const add = () => {
         setName(''); 
     }
 
-console.log(ideas[1][0])
+console.log(ideas[1])
     return (
       <>
         <li className="list-group-item">
@@ -64,10 +64,17 @@ console.log(ideas[1][0])
                     <label>Amount: 
                     <input type="number" value={don} onChange={e => setDon(e.target.value)}></input>
            </label>
-
-
+                <button onClick={add}>Add your donation</button>
            <h2>Performed donations:</h2>
-           <button onClick={add}>Add your donation</button>
+           {
+               ideas[1].map(r => r.id !== null ? <li key={r.id} className="list-group-item">
+                            
+               Donator name:{r.name}; 
+               Donation:{r.sum} (eur);
+           
+       </li> : null) 
+           }
+           
                     </>
     )
 }
