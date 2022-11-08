@@ -9,6 +9,7 @@ const { setCreate } = useContext(Prop);
 
 const add = () => {
     setCreate({
+            prop_id: ideas[1][0].id,
             name: name,
             sum: don,
         })
@@ -16,7 +17,7 @@ const add = () => {
         setName(''); 
     }
 
-console.log(ideas)
+console.log(ideas[1][0])
     return (
       <>
         <li className="list-group-item">

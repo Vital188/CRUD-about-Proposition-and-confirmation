@@ -29,6 +29,7 @@ function Main() {
     useEffect(() => {
         axios.get('http://localhost:3003/home/prop', authConfig())
             .then(res => {
+                console.log(res.data)
                 setIdeas(reList(res.data));
             })
     }, [lastUpdate]);
