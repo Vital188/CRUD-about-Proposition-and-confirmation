@@ -1,12 +1,22 @@
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import Prop from '../../Contexts/Prop/Prop'
 
 function Line({ ideas }) {
 
 const [don, setDon] = useState('')
 const [name, setName] = useState('')
+const { setCreate } = useContext(Prop);
 
+const add = () => {
+    setCreate({
+            name: name,
+            sum: don,
+        })
+        setDon('');
+        setName(''); 
+    }
 
+console.log(ideas)
     return (
       <>
         <li className="list-group-item">
@@ -54,7 +64,9 @@ const [name, setName] = useState('')
                     <input type="number" value={don} onChange={e => setDon(e.target.value)}></input>
            </label>
 
+
            <h2>Performed donations:</h2>
+           <button onClick={add}>Add your donation</button>
                     </>
     )
 }

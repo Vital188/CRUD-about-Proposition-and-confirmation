@@ -11,6 +11,7 @@ function Main() {
     const [ideas, setIdeas] = useState(null);
     const [real, setReal] = useState(null);
     const { makeMsg } = useContext(DataContext);
+    const [create, setCreate] = useState(null);
 
     const reList = data => {
         const d = new Map();
@@ -43,10 +44,22 @@ function Main() {
     //         })
     // }, [real, makeMsg]);
 
+    useEffect(() => {
+        if (null === create) {
+            return;
+        }
+        axios.post('http://localhost:3003/home/donat', create, authConfig())
+            .then(res => {
+                setLastUpdate(Date.now());
+                makeMsg(res.data.text, res.data.type);
+            });
+    }, [create, makeMsg]);
+
     return (
         <Prop.Provider value={{
             setReal,
-            ideas
+            ideas,
+            setCreate
         }}>
             <div className="container">
                 <div className="row">

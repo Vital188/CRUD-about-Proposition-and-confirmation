@@ -161,6 +161,17 @@ app.post("/home/prop", (req, res) => {
         res.send({ msg: 'OK', text: 'Project was confirmed.', type: 'success' });
     });
 });
+
+app.post("/home/donat", (req, res) => {
+    const sql = `
+    INSERT INTO donat (name, sum)
+    VALUES (?, ?)
+    `;
+    con.query(sql, [req.body.name, req.body.sum], (err, result) => {
+        if (err) throw err;
+        res.send({ msg: 'OK', text: 'Donation was performed!', type: 'success' });
+    });
+});
 // app.get("/home/ideas", (req, res) => {
 //     const sql = `
 //     SELECT *
@@ -228,9 +239,11 @@ app.get("/home/ideas/wc", (req, res) => {
 
 app.get("/home/prop", (req, res) => {
     const sql = `
-    SELECT *
-    FROM prop
-    ORDER BY id DESC
+    SELECT p.*, d.id AS did, d.name, d.sum 
+    FROM prop AS p
+    LEFT JOIN donat AS d
+    ON d.id = p.id
+    ORDER BY p.title
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
