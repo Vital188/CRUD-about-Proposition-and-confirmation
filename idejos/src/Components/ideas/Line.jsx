@@ -1,9 +1,11 @@
-import { useContext } from 'react';
+import { useState } from 'react';
 import Ideas from '../../Contexts/Ideas';
 
 function Line({ ideas }) {
 
-  
+const [don, setDon] = useState(null) 
+
+
     return (
         <>
         
@@ -31,10 +33,8 @@ function Line({ ideas }) {
                     <div className="line__content__info">
                       Description:  {ideas.post}
                     </div>
-                    <div className="line__content__info">
-                    Price (eur):  {ideas.price}
+                    Project price: {ideas.price}
                     </div>
-                     </div>
                
             </div>
         </li></>

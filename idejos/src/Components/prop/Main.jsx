@@ -1,4 +1,4 @@
-import Realist from "../../Contexts/Realist";
+import Prop from '../../Contexts/Prop/Prop'
 import List from "./List";
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -26,7 +26,7 @@ function Main() {
     console.log(ideas)
     // READ for list
     useEffect(() => {
-        axios.get('http://localhost:3003/home/reals/', authConfig())
+        axios.get('http://localhost:3003/home/prop', authConfig())
             .then(res => {
                 setIdeas(reList(res.data));
             })
@@ -44,7 +44,7 @@ function Main() {
     // }, [real, makeMsg]);
 
     return (
-        <Realist.Provider value={{
+        <Prop.Provider value={{
             setReal,
             ideas
         }}>
@@ -55,7 +55,7 @@ function Main() {
                     </div>
                 </div>
             </div>
-        </Realist.Provider>
+        </Prop.Provider>
     );
 }
 

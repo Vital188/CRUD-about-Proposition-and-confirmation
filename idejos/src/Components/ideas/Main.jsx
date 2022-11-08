@@ -20,7 +20,7 @@ function Main() {
 
     // READ for list
     useEffect(() => {
-        axios.get('http://localhost:3003/server/ideas/wc', authConfig())
+        axios.get('http://localhost:3003/home/ideas/wc', authConfig())
             .then(res => {
                 setIdeas(res.data);
             })

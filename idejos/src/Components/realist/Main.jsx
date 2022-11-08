@@ -10,6 +10,7 @@ function Main() {
     const [lastUpdate, setLastUpdate] = useState(Date.now());
     const [ideas, setIdeas] = useState(null);
     const [reals, setReals] = useState(null);
+    const [createData, setCreateData] = useState(null)
     const { makeMsg } = useContext(DataContext);
     
     const reList = data => {
@@ -43,11 +44,23 @@ function Main() {
              })
      }, [reals, makeMsg]);
      console.log(reals)
+
+     useEffect(() => {
+        if (null === createData) {
+            return;
+        }
+        axios.post('http://localhost:3003/home/prop', createData, authConfig())
+            .then(res => {
+                setLastUpdate(Date.now());
+                makeMsg(res.data.text, res.data.type);
+            });
+    }, [createData, makeMsg]);
    
     return (
         <Realist.Provider value={{
             setReals,
             ideas,
+            setCreateData
                     }}>
             <div className="container">
                 <div className="row">

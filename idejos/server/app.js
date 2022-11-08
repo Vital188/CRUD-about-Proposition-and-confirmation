@@ -150,6 +150,17 @@ app.post("/home/reals/:id", (req, res) => {
         res.send({ msg: 'OK', text: 'Thanks, for commenting.', type: 'info' });
     });
 });
+
+app.post("/home/prop", (req, res) => {
+    const sql = `
+    INSERT INTO prop (id, title, post, price, image)
+    VALUES (?, ?, ?, ?, ?)
+    `;
+    con.query(sql, [req.params.id, req.body.title, req.body.post, req.body.price, req.body.image], (err, result) => {
+        if (err) throw err;
+        res.send({ msg: 'OK', text: 'Project was confirmed.', type: 'success' });
+    });
+});
 // app.get("/home/ideas", (req, res) => {
 //     const sql = `
 //     SELECT *
@@ -167,7 +178,7 @@ app.get("/home/reals/", (req, res) => {
     FROM ideas AS i
     LEFT JOIN reals AS r
     ON r.ideas_id = i.id
-    ORDER BY r.orderis
+    ORDER BY r.id
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
@@ -181,7 +192,7 @@ app.get("/server/reals/wc", (req, res) => {
     FROM ideas AS i
     LEFT JOIN reals AS r
     ON r.ideas_id = i.id
-    ORDER BY r.orderis
+    ORDER BY r.id
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
@@ -203,10 +214,22 @@ app.get("/home/ideas", (req, res) => {
     });
 });
 
-app.get("/server/ideas/wc", (req, res) => {
+app.get("/home/ideas/wc", (req, res) => {
     const sql = `
     SELECT *
     FROM ideas
+    ORDER BY id DESC
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+app.get("/home/prop", (req, res) => {
+    const sql = `
+    SELECT *
+    FROM prop
     ORDER BY id DESC
     `;
     con.query(sql, (err, result) => {

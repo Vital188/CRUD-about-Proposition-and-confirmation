@@ -4,7 +4,7 @@ import Nav from './Components/Nav';
 import Ideas from './Components/ideas/Main'
 import MainRealist from './Components/realist/Main';
 import MainIdeas from './Components/ideas/Main';
-import MainReal from './Components/real/Main'
+import MainProp from './Components/prop/Main'
 import RegisterPage from './Components/register/Main';
 import { login, logout, authConfig } from './Functions/auth';
 import { useState, useEffect, useCallback, useContext } from 'react';
@@ -57,7 +57,7 @@ function App() {
           <Route path="/logout" element={<LogoutPage setRoleChange={setRoleChange} />} />
           <Route path="/ideas" element={<RequireAuth role="user"><MainIdeas /></RequireAuth>}></Route>
           <Route path="/realisation" element={<RequireAuth role="admin"><MainRealist /></RequireAuth>}></Route>
-          <Route path="/realis" element={<RequireAuth role="user"><MainReal /></RequireAuth>}></Route>
+          <Route path="/projects" element={<RequireAuth role="user"><MainProp /></RequireAuth>}></Route>
           {/* <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} /> */}
         </Routes>
       </BrowserRouter>

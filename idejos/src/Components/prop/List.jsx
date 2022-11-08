@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
-import Realist from '../../Contexts/Realist';
+import Prop from '../../Contexts/Prop/Prop';
 import Line from './Line';
 
 
 function List() {
 
-    const { ideas } = useContext(Realist);
+    const { ideas } = useContext(Prop);
     const [stats, setStats] = useState({ ideasCount: null });
 
 
@@ -18,7 +18,7 @@ function List() {
 
     return (
         <div className="card m-4">
-            <h5 className="card-header">Ideas List ({stats.ideasCount})</h5>
+            <h5 className="card-header">Project List ({stats.ideasCount})</h5>
             <div className="card-body">
                 <ul className="list-group">
                     {

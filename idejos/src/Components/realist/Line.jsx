@@ -5,7 +5,7 @@ import { authConfig } from '../../Functions/auth';
 
 function Line({ ideas }) {
 
-    const { setIdeas, setReals } = useContext(Realist);
+    const { setIdeas, setReals, setCreateData } = useContext(Realist);
     const [color, setColor] = useState('white');
     const [tit, setTit] = useState('Confirmation')
 
@@ -13,12 +13,17 @@ function Line({ ideas }) {
         setReals({id});
     }
 
-//         const add = () => {
-//             setReals({
-//                 ideas_id: ideas[1][0].iid
-//             });
-//  }
-console.log(ideas)
+        const add = () => {
+            setCreateData({
+                    id: ideas[1][0].id,
+                    title: ideas[1][0].title,
+                    price: ideas[1][0].price,
+                    post: ideas[1][0].post,
+                    image: ideas[1][0].image
+                }) 
+            }
+  
+
     return (
         <li className="list-group-item" style={{
             display: 'flex',
@@ -34,7 +39,7 @@ console.log(ideas)
                         </div> : null}
                         <div>TITLE: {ideas[0]}. </div>
                         <div className="home__content__info">
-                       
+                    Description: {ideas[1][0].post}.   
                     </div>
                     <div className="home__content__info">
                       Price:  {ideas[1][0].price} Eur
@@ -44,10 +49,9 @@ console.log(ideas)
                     </div>
                 </div>
             </div>
-            {/* <button onClick={add} type="button" style={{
-                                    backgroundColor: color,      
-                                    color: 'black'
-                                }} className="btn btn-outline-success">{tit}</button>  */}
+            
+                            
+                            <button onClick={() => remove(ideas[1][0].id)} type="button" className="btn btn-outline-danger">Delete</button>
             
                                 
                                  
@@ -55,12 +59,12 @@ console.log(ideas)
                 <ul className="list-group">
                     {
                         ideas[1]?.map(r => r.id !== null ? <li key={r.id} className="list-group-item">
-                           Description: {r.post}. 
-                                <button onClick={() => remove(r.id)} type="button" className="btn btn-outline-danger">Delete</button>
+                            
+                                <button onClick={add} type="button" className="btn btn-outline-danger">Confirmation</button>
                             
                         </li> : null)
                     }
-                </ul>
+                </ul> 
             
         </li>
     )
