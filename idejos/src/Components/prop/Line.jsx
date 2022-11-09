@@ -20,7 +20,10 @@ const add = () => {
 console.log(ideas[1])
     return (
       <>
-        <li className="list-group-item">
+        <li className="list-group-item" style={{
+        border: '2px solid black',
+        marginBottom: '30px' 
+        }}>
             <div className="home" style={{
                     border: '1px solid',
                     borderRadius: '10px',
@@ -36,18 +39,19 @@ console.log(ideas[1])
                         flexDirection: 'column',
                         alignItems: 'flex-start'
                     }}>
-                       Title: {ideas[0]} 
-                        <div >
-                       Project price {ideas[1][0].price} Eur
+                      <div>
+                      <b> Title:</b> {ideas[0]} 
+                        </div><div >
+                       <b>Project price:</b> {ideas[1][0].price} Eur
                     </div>
-                    <div className="home__content__imfo">
-                      Raised funds:   
+                    <div >
+                      <b>Raised funds: </b>  
                     </div>
-                    <div className="home__content__imfo">
-                      Left to start project: 
+                    <div >
+                      <b>Left to start project:</b> 
                     </div></div>
                         <div className="home__content__info">
-                      Project description:  {ideas[1][0].post} 
+                      <b>Project description:</b>  {ideas[1][0].post} 
                     </div>
                     
                                
@@ -91,12 +95,12 @@ console.log(ideas[1])
                     borderRadius: '10px',
                     padding: '5px'
                    }}>
-           <h2>Performed donations <small>({ideas[1].length})</small>:</h2>
+           <h2>Performed donations </h2>
            {
                ideas[1].map(r => r.id !== null ? <li key={r.id} className="list-group-item">
                             
-               Donator name:{r.name}; 
-               Donation:{r.sum} (eur);
+               <b>Donator name:  </b>  {r.name}; 
+               <b>Donation:  </b>  {r.sum} (Eur);
            
        </li> : null) 
            }</div>

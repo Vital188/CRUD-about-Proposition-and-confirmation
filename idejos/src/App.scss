@@ -67,7 +67,7 @@ h5 small {
         display: block;
         margin: 10px;
         &.ok {
-            background-color: aquamarine;
+            background-color: rgb(59, 79, 228);
             color: white;
         }
         &.error {
@@ -75,7 +75,7 @@ h5 small {
             color: white;
         }
         &.info {
-            background-color: skyblue;
+            background-color: rgb(11, 63, 18);
             color: white;
         }
     }
