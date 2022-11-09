@@ -32,7 +32,7 @@ function Create() {
             makeMsg('Invalid price', 'error');
             return;
         }
-        if (parseFloat(price) > 999.99) {
+        if (parseFloat(price) > 99999.99) {
             makeMsg('Max price is 999.99', 'error');
             return;
         }
