@@ -61,7 +61,7 @@ console.log(show)
                       <b>Left to start project: {alex}</b>  
                     </div></div>
                         <div className="home__content__info">
-                      <b>Project description:</b>  {ideas[1][0].post} 
+                      <b>Project description:  </b>  {ideas[1][0].post} 
                     </div>          
                 </div>
             </div>           
