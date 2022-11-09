@@ -1,7 +1,7 @@
 
 
 function Line({ ideas }) {
-
+    console.log(ideas)
     return (
         <>
         
@@ -43,8 +43,14 @@ function Line({ ideas }) {
                 <div className="line__content" style={{
                     flexDirection: 'column'
                 }}>
-                    
-                    
+                    { ideas.orderis === 0 ?
+                    <button  type="button" className="btn btn-outline-danger"> Waiting confirmation</button> :
+            <button disabled type="button" className="btn btn-outline-danger" style={{
+                    backgroundColor: 'WHITE',
+                    color: 'green',
+                    border: '1px solid black'
+                    }}>Confirmed</button>        
+                }
                     
                     
                </div>

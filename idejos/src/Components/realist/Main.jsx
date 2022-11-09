@@ -55,6 +55,8 @@ function Main() {
                 makeMsg(res.data.text, res.data.type);
             });
     }, [createData, makeMsg]);
+
+    
    
     return (
         <Realist.Provider value={{

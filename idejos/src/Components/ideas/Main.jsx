@@ -59,7 +59,7 @@ function Main() {
             });
     }, [editData, makeMsg]);
 
-console.log(ideas)
+
     return (
         <Ideas.Provider value={{
             setCreateData,

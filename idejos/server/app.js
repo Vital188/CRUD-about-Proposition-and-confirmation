@@ -153,10 +153,10 @@ app.post("/home/reals/:id", (req, res) => {
 
 app.post("/home/prop", (req, res) => {
     const sql = `
-    INSERT INTO prop (id, title, post, price, image)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO prop (id, title, post, price, image, snow, ideas_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
-    con.query(sql, [req.params.id, req.body.title, req.body.post, req.body.price, req.body.image], (err, result) => {
+    con.query(sql, [req.params.id, req.body.title, req.body.post, req.body.price, req.body.image, req.body.snow, req.body.ideas_id], (err, result) => {
         if (err) throw err;
         res.send({ msg: 'OK', text: 'Project was confirmed.', type: 'success' });
     });
@@ -211,12 +211,26 @@ app.get("/server/reals/wc", (req, res) => {
     });
 });
 
+// app.get("/home/ideas", (req, res) => {
+//     const sql = `
+//     SELECT i.*, r.id AS rid 
+//     FROM ideas AS i
+//     LEFT JOIN reals AS r
+//     ON r.ideas_id = i.id
+//     ORDER BY i.title
+//     `;
+//     con.query(sql, (err, result) => {
+//         if (err) throw err;
+//         res.send(result);
+//     });
+// });
+
 app.get("/home/ideas", (req, res) => {
     const sql = `
-    SELECT i.*, r.id AS rid 
+    SELECT i.*, p.id AS pid, p.snow
     FROM ideas AS i
-    LEFT JOIN reals AS r
-    ON r.id = i.id
+    LEFT JOIN prop AS p
+    ON p.ideas_id = i.id
     ORDER BY i.title
     `;
     con.query(sql, (err, result) => {
@@ -227,9 +241,11 @@ app.get("/home/ideas", (req, res) => {
 
 app.get("/home/ideas/wc", (req, res) => {
     const sql = `
-    SELECT *
-    FROM ideas
-    ORDER BY id DESC
+    SELECT i.*, p.id AS pid, p.snow 
+    FROM ideas AS i
+    LEFT JOIN prop AS p
+    ON p.ideas_id = i.id
+    ORDER BY i.title
     `;
     con.query(sql, (err, result) => {
         if (err) throw err;
@@ -285,15 +301,12 @@ app.put("/home/ideas/:id", (req, res) => {
     const sql = `
     UPDATE ideas
     SET 
-    rating_sum = rating_sum + ?, 
-    rating_count = rating_count + 1, 
-    rating = rating_sum / rating_count
+    orderis = ?
     WHERE id = ?
     `;
-    con.query(sql, [req.body.rate, req.params.id], (err, result) => {
+    con.query(sql, [req.body.confirmed, req.params.id], (err, result) => {
         if (err) throw err;
-        res.send({ msg: 'OK', text: 'Thanks, for your vote.', type: 'info' });
-    });
+            });
 });
 
 app.put("/server/reals/:id", (req, res) => {
