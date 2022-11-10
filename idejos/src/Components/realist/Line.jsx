@@ -34,15 +34,21 @@ function Line({ ideas }) {
             display: 'flex',
     alignItems: 'center'
         }}>
-            <div className="home">
-                <div className="home__content">
+            <div className="home" style={{
+                alighItems: "center",
+                justifyContent: 'center',
+                flexDirection: 'column'
+            }}>
+                <div className="home__content" style={{
+                    display: 'contents'
+                }}> <div className="home__content__info">TITLE: {ideas[0]} </div>
                     <div className="home__content__info">
                        
                         {ideas[1][0].image ? <div className='img-bin'>
                             <img src={ideas[1][0].image} alt={ideas[0]}>
                             </img>
                         </div> : null}
-                        <div>TITLE: {ideas[0]}. </div>
+                       
                         <div className="home__content__info">
                     Description: {ideas[1][0].post}.   
                     </div>
@@ -52,25 +58,27 @@ function Line({ ideas }) {
 
                     
                     </div>
-                </div>
+                
             </div>
             
-                           
+                { ideas[1][0].orderis === 0 ?   
                             <button onClick={() => remove(ideas[1][0].id)} type="button" style={{
-                                marginRight: '10px'
-                            }} className="btn btn-outline-danger">Delete</button>
+                                marginBottom: '10px'
+                            }} className="btn btn-outline-danger" >Delete</button> : null
+                        }
                             
                            { ideas[1][0].orderis === 0 ?   
                     ( 
-                                     
+                                    
                                 <button onClick={add} type="button" className="btn btn-outline-danger">Confirmation</button>                           
                     
                     ) :
                     <button disabled type="button" className="btn btn-outline-danger" style={{
                     backgroundColor: 'WHITE',
-                    color: 'green'
+                    color: 'green',
+                    height: '40px'
                     }}>Confirmed</button>
-            }
+            }</div> 
         </li>
     )
 }
