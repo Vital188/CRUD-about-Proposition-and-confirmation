@@ -21,12 +21,12 @@ const add = () => {
     const alex = ideas[1][0].price - alexis
 
     useEffect(() => {
-      if ( alex < 0) {
+      if ( alex < 0 || alex === 0) {
         setShow(1)
       }
        }, [alex]);
 
-console.log(show)
+
     return (
       <>
       {show === 0 ?
@@ -74,7 +74,9 @@ console.log(show)
                     <div style={{
                         display: 'flex',
                         justifyContent: 'space-around',
-                        marginBottom: '20px'
+                        marginBottom: '20px',
+                        flexDirection: 'column',
+                        padding: '10px'
                     }}>
                     <label>
                       <b style={{
@@ -140,13 +142,18 @@ console.log(show)
                        <b>Project price:</b> {ideas[1][0].price} Eur
                     </div>
                     <div >
-                      <b>Raised funds: {alexis} </b>  
+                      <b>Raised funds:</b>
+                       {alexis} Eur   
                     </div>
                     <div >
-                      <b>Left to start project: {alex}</b>  
+                      <b>Left to start project:</b>
+                       {alex} Eur 
                     </div></div>
-                        <div className="home__content__info">
-                      <b>Project description:</b>  {ideas[1][0].post} 
+                        <div className="home__content__info" style={{
+                          justifyContent: 'flex-start;'
+                        }}>
+                      <b>Project description:</b>
+                        {ideas[1][0].post} 
                     </div>          
                 </div>
             </div>           
