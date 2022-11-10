@@ -49,8 +49,12 @@ function Line({ ideas }) {
                             </img>
                         </div> : null}
                        
-                        <div className="home__content__info">
-                    Description: {ideas[1][0].post}.   
+                        <div className="line__content__info" style={{
+                            width: '250px',
+                            height: 'auto'
+                        }}>
+                   <b> Description: </b>
+                    {ideas[1][0].post}.   
                     </div>
                     <div className="home__content__info">
                       Price:  {ideas[1][0].price} Eur
