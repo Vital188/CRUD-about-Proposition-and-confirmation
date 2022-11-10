@@ -25,7 +25,7 @@ function Line({ ideas }) {
                     </div>
                     <b>Description:</b>
                     <div className="line__content__info" style={{
-                            width: '300px',
+                            width: '250px',
                             height: 'auto'
                       }}>
                         {ideas.post} 
