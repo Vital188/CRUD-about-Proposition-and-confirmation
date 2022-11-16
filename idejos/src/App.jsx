@@ -58,7 +58,7 @@ function App() {
           <Route path="/ideas" element={<RequireAuth role="user"><MainIdeas /></RequireAuth>}></Route>
           <Route path="/realisation" element={<RequireAuth role="admin"><MainRealist /></RequireAuth>}></Route>
           <Route path="/projects" element={<RequireAuth role="user"><MainProp /></RequireAuth>}></Route>
-          {/* <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} /> */}
+          <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} />
         </Routes>
       </BrowserRouter>
     </DataContext.Provider>
